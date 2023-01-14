@@ -1,6 +1,6 @@
 # mediawiki-test
 
-challenge-1
+Challenge-1
 ===========
 #pull the mediawiki image from dockerhub
 podman pull mediawiki
@@ -34,3 +34,25 @@ oc new-app --name=mediawiki --image=quay.io/tripatikumarpatra/mediawiki:1.0 --as
 oc get svc
 oc expose svc mediawiki
 ![image](https://user-images.githubusercontent.com/38211738/212481149-aa336f28-231a-40ee-8f76-49739ec22f34.png)
+
+  
+  
+Challenge-2
+===========
+#Create a new namespace  
+oc new-project project-test
+
+#create resource quota for project-test 
+oc create quota project-test-quota --hard=cpu=2,memory=3Gi
+  
+#Deploy theree different application
+oc new-app --name=poda --image=nginx:1.20-ubi8 --as-deployment-config
+oc new-app --name=podb --image=httpd:2.4-el8 --as-deployment-config
+oc new-app --name=podc --image=php:7.4-ubi8 --as-deployment-config 
+
+#Set resource to different application/DC
+oc set resources dc poda --limits=memory=400Mi --requests=memory=400Mi
+oc set resources dc podb --limits=memory=200Mi --requests=memory=200Mi
+oc set resources dc podc --limits=memory=400Mi --requests=memory=400Mi
+
+ 
