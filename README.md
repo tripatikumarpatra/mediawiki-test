@@ -55,4 +55,11 @@ oc set resources dc poda --limits=memory=400Mi --requests=memory=400Mi
 oc set resources dc podb --limits=memory=200Mi --requests=memory=200Mi
 oc set resources dc podc --limits=memory=400Mi --requests=memory=400Mi
 
+Challenge-3
+============
+Create a template yaml file for a test application, which is having all customized code for app name, Deplyoment name, service name, route name, hostname etc.
+file name: nginx-template.yaml
+
+while running the yaml file, we need to pass the argument like below.
+oc process -f nginx-template.yaml -p NAME=<name> -p APPLICATION_DOMAIN=<domain-name> |oc create -f - 
  
